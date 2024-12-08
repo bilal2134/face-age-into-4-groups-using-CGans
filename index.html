@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Face Aging GAN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        select {
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Face Aging GAN</h1>
+        <form method="post">
+            <label for="age_category">Select Age Category:</label>
+            <select name="age_category" id="age_category">
+                {% for category in age_categories %}
+                <option value="{{ category }}" {% if category == selected_age %}selected{% endif %}>{{ category }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <button type="submit">Generate Face</button>
+        </form>
+        <br>
+        {% if img_data %}
+        <h2>Generated {{ selected_age }} Face</h2>
+        <img src="data:image/png;base64,{{ img_data }}" alt="Generated Face">
+        {% endif %}
+    </div>
+</body>
+</html>
